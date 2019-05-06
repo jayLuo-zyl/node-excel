@@ -71,13 +71,14 @@ var worksheet = workbook.addWorksheet('Jay 10');
 worksheet.cell(1, 1).string('County Code Value');
 worksheet.cell(1, 2).string('County Name');
 
-// console.log(Object.keys(countyCodes).length);
-
-let count = 1
+let sortedArr = [];
 for (let el in countyCodes){
-    count +=1;
-    worksheet.cell(count, 1).number(+el);
-    worksheet.cell(count, 2).string(countyCodes[el]);
+    sortedArr.push(el)
 }
+
+sortedArr.sort().forEach( el => {
+    worksheet.cell(+el+1, 1).number(+el);
+    worksheet.cell(+el+1, 2).string(countyCodes[el]);    
+})
 
 workbook.write('Excel.xlsx');
